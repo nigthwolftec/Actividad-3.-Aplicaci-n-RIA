@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Saludo con Servicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="Recursos/COFi.ico" />
+  <link rel="stylesheet" href="CSS/pag.css">
+  <style>
+    body {font-family: sans-serif}
+    </style>
+</head>
+
+<body>
+  <div id="agrupar">
+    <header id="cabecera">
+      <hgroup>
+        <h1>Biblio Tec </h1>
+        <h2>» » » Tu Mejor Opción« « «</h2>
+        <div class="der">
+          <a href="http://www.utn.edu.mx/"><img src="IMAGENES/utn.gif" class="imagen4"></a>
+        </div>
+      </hgroup>
+    </header>
+    <section>
+        <nav id="menu">
+            <ul class="nave">
+              <li> <a href="index.html">
+                  <h2>Inicio</h2>
+                </a> </li>
+              <li> <a href="XD.php">
+                  <h2>Busqueda de libros</h2>
+                </a> </li>
+              <li> <a href="AS.PHP">
+                  <h2>Busqueda de Bibliotecas</h2>
+                </a></li>
+            </ul>
+          </nav>
+    </section>
+    <section id="seccion">
+      <img class="imagen5" src="IMAGENES/nig.png" />
+      <br>
+      <h1>Saludo con Servicio</h1>
+      <form name="vista">
+        <p><center></center>
+          <input type="text" name="nombre1" placeholder="Biblioteca" accesskey="1">
+        </p>
+        <p><center></center>
+          <input type="text" name="nombre2" placeholder="Horario" accesskey="2">
+        </p>
+        <p><center></center>
+          <input type="text" name="nombre3" placeholder="Actividad" accesskey="3">
+        </p>
+        <p><center></center><output name="respuesta"></output></p>
+        <p><center></center><button type="submit">Saludar</button></p>
+      </form>
+      <script>
+        "use strict";
+        const vista = document.vista;
+        let respuesta;
+        document.vista.addEventListener("submit", saluda);
+        async function saluda(evt) {
+          evt.preventDefault();
+          const datos = new FormData(vista);
+          let respuesta;
+          try {
+            const respuestaHttp = await
+              fetch("servicioSaluda.php?XDEBUG_SESSION_START=name", { method: "POST", body: datos });
+            if (respuestaHttp.ok) {
+              respuesta = await respuestaHttp.text();
+            } else {
+              throw new Error(respuestaHttp.statusText);
+            }
+          } catch (e) {
+            respuesta = e.message;
+          }
+          vista.respuesta.value = respuesta;
+        }
+      </script>
+    </section>
+    <aside id="columna">
+      <a href="index.html"> <img class="imagen6" src="IMAGENES/v.png" /></a>
+    </aside>
+    <aside id="columna">
+      <h4> Redes sociales </h4><br>
+      <h2>Facebook</h2>
+      <a href="https://www.facebook.com"> <img class="imagen4" src="IMAGENES/f.png" /></a>
+      <br><br>
+      <h2>Instagram</h2><br>
+      <a href="https://www.instagram.com/yoyo_y_yo_/"> <img class="imagen4" src="IMAGENES/i.png" /></a>
+      <br><br>
+      <h2>Twitter</h2>
+      <a href="https://twitter.com/"> <img class="imagen4" src="IMAGENES/t.png"></a>
+    </aside>
+    <footer id="pie">
+      Derechos reservados Nigthwolf Tec &copy; 2019
+    </footer>
+  </div>
+</body>
+
+</html>
